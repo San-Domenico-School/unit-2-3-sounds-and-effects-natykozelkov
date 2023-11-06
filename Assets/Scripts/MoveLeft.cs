@@ -21,11 +21,26 @@ public class MoveLeft : MonoBehaviour
     {
         speed = 20f;
         leftBound = -15f;
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!playerControllerScript.gameOver)
+        {
             transform.Translate(Time.deltaTime * Vector3.left * speed);
+        }
+        else
+        {
+            speed = 0.0f;
+        }
+
+        if (gameObject.transform.position.x < leftBound && gameObject.tag == "Obstacle")
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
