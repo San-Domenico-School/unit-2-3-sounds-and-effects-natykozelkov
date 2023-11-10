@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerAnimation = GetComponent<Animator>();
         isOnGround = true;
         Physics.gravity *= gravityModifier;
         gameOver = false;
@@ -38,10 +39,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputValue input)
     {
-        if(isOnGround)
+        if(isOnGround && !gameOver)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            playerAnimation.SetTrigger("Jump_trig");
         }
     }
 
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour
        else if (collision.gameObject.tag == "Obstacle")
         {
             gameOver = true;
+            playerAnimation.SetBool("Death_b", true);
+            playerAnimation.SetInteger("DeathType_int", 1);
         }
     }
 
