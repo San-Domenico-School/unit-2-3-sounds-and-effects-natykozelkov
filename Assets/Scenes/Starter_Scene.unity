@@ -319,7 +319,7 @@ MonoBehaviour:
   explosionParticle: {fileID: 1173278907}
   dirtParticle: {fileID: 321496789}
   jumpSound: {fileID: 8300000, guid: 113ee460fadc340e4957a7404a9fbb27, type: 3}
-  crashSound: {fileID: 8300000, guid: 913d6445ee8cc4152a9c18da590ee203, type: 3}
+  crashSound: {fileID: 8300000, guid: 4bcde6de2166e41e284ec46d8a01fb90, type: 3}
 --- !u!4 &58773345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 03ffd135f81a3fb4cb6f2e6e944f979d,

@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
         isOnGround = true;
         Physics.gravity *= gravityModifier;
         gameOver = false;
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
             explosionParticle.Play();
             dirtParticle.Stop();
             playerAudio.PlayOneShot(crashSound, 1.0f);
+
 
         }
     }
