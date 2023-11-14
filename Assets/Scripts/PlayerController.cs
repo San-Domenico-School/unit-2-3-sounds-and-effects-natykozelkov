@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /********************************************
- * GameObject "Player" stays in one place while his background is moving.
+ * GameObject "Player", takes in user input
+ * to move and turn the player.
  * 
  * Naty Kozelkova
  * October 31, 2023 Version 1.0
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnimation.SetTrigger("Jump_trig");
+            dirtParticle.Stop();
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
     }
 
@@ -52,12 +55,17 @@ public class PlayerController : MonoBehaviour
        if(collision.gameObject.name == "Ground")
         {
             isOnGround = true;
+            dirtParticle.Play();
         }
        else if (collision.gameObject.tag == "Obstacle")
         {
             gameOver = true;
             playerAnimation.SetBool("Death_b", true);
             playerAnimation.SetInteger("DeathType_int", 1);
+            explosionParticle.Play();
+            dirtParticle.Stop();
+            playerAudio.PlayOneShot(crashSound, 1.0f);
+
         }
     }
 
