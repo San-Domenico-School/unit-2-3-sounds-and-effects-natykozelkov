@@ -71,7 +71,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-      
-       
+      if (other.tag == "Scoreable")
+        {
+            GameManager.ChangeScore(10);
+        }
     }
 }

@@ -42,12 +42,27 @@ public class GameManager : MonoBehaviour
 
     void DisplayUI()
     {
-
+        scoreboardText.text = "Score: " + Mathf.RoundToInt(score).ToString();
+        if (timedGame && !gameOver)
+        {
+            if(timeRemaining > 0)
+            {
+                timeRemainingText.text = timeRemaining.ToString();
+            }
+            else
+            {
+                timeRemainingText.text = "Game\nOver";
+            }
+        }
     }
 
     void TimeCountdown()
     {
-
+        timeRemaining--; 
+        if (timeRemaining <= 0)
+        {
+            CancelInvoke("TimeCountdown");
+        }
     }
 
     public void StartGame()
@@ -64,22 +79,32 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         spawnManager.SetActive(true);
         playerAnimator.SetBool("BeginGame_b", true);
+        playerAnimator.SetFloat("Speed_f", 1.0f);
         dirtSplatter.Play();
     }
 
     void EndGame()
     {
-
+        if (gameOver || timeRemaining == 0)
+        {
+            gameOver = true;
+            playerAnimator.SetBool("BeginGame_b", false);
+            playerAnimator.SetFloat("Speed_f", 0);
+            audioSource.Stop();
+            CancelInvoke();
+            timeRemainingText.text = "Game\nOver";
+        }
     }
 
     public void SetTimed (bool timed)
     {
-
+        Debug.Log("Is game over?");
+        timedGame = timed;
     }
 
     public static void ChangeScore (int change)
     {
-
+        score += change;
     }
 
 }

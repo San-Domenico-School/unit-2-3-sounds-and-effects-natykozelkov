@@ -16,6 +16,13 @@ public class MoveLeft : MonoBehaviour
     private float leftBound;
 
 
+
+    private void Start()
+    {
+        speed = 15.0f;
+        leftBound = -15.0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -23,10 +30,6 @@ public class MoveLeft : MonoBehaviour
         if (!GameManager.gameOver)
         {
             transform.Translate(Time.deltaTime * Vector3.left * speed);
-        }
-        else
-        {
-            speed = 0.0f;
         }
 
         if (gameObject.transform.position.x < leftBound && gameObject.tag == "Obstacle")
